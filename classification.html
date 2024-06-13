@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Stop and Searchs – classification</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Stop and Searchs</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">Introduction</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./EDA.html">Exploratory Data Analysis</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./classification.html" aria-current="page">Classification</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">About</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#classification" id="toc-classification" class="nav-link active" data-scroll-target="#classification">Classification</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#data-pre-processing" id="toc-data-pre-processing" class="nav-link" data-scroll-target="#data-pre-processing">Data Pre Processing</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#xgboost" id="toc-xgboost" class="nav-link" data-scroll-target="#xgboost">XGBoost</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="classification" class="level1">
+<h1>Classification</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Classification is a concept in machine learning and data science, used to predict categorical outcomes based on input data. In this project, classification techniques are employed to determine the result of police SAS procedures in London. Specifically, the goal is to classify each stop as either resulting in a significant outcome, such as an arrest (true), or yielding no incriminating evidence (false). By analysing various features from the SAS data, including temporal, demographic, and spatial (location) variables, classification models can help predict the likelihood of a meaningful outcome, aiding in the evaluation and optimisation of law enforcement practices.</p>
+</section>
+<section id="data-pre-processing" class="level2">
+<h2 class="anchored" data-anchor-id="data-pre-processing">Data Pre Processing</h2>
+<p>The steps taken to prepare the data can be seen in <a href="#fig-flow">Figure&nbsp;1</a>.</p>
+<div id="fig-flow" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/data_preprocessing_flow.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Data Preprocessing Flowchart</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Two different classification models are used to predict the outcomes of police stop and search incidents: Logistic Regression and XGBoost. Here’s a brief introduction to each model:</p>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<p>x</p>
+</section>
+<section id="xgboost" class="level3">
+<h3 class="anchored" data-anchor-id="xgboost">XGBoost</h3>
+<p>y</p>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>XGBoost appears to have a better accuracy than logistic regression.</p>
+<div id="fig-accuracy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/classification/accuracy.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Barchart showing accuracy of the classifcation models on the test data.</figcaption><p></p>
+</figure>
+</div>
+<p>This is supported by a confusion matrix, allowing identification of type 1 &amp; 2 errors. In these matrices, type 1 errors (False Positives) are represented in the upper right cell of each matrix, while type 2 errors (False Negatives) are in the lower left cell. Type 1 error, also known as a false positive, occurs when the model incorrectly predicts a positive outcome for a stop and search operation, i.e., predicting that an illegal item will be found when it is not. Type 2 error, or false negative, occurs when the model incorrectly predicts a negative outcome, i.e., predicting that no illegal item will be found when it is.</p>
+<p>These errors have significant implications for police operations and public trust. A high number of false positives (type 1 errors) could lead to unnecessary searches, potentially eroding public trust and wasting police resources. For instance, the Logistic Regression model has 15,370 false positives, whereas the XGBoost model has 15,985, indicating that XGBoost might lead to slightly more unnecessary searches compared to Logistic Regression. This increase in unnecessary searches could result in more civilian inconvenience and dissatisfaction, which is particularly sensitive in the context of police-community relations.</p>
+<p>On the other hand, a high number of false negatives (type 2 errors) could mean that illegal items are missed during searches, which could have public safety implications. The Logistic Regression model shows 18,181 false negatives compared to only 10,505 for the XGBoost model. This substantial reduction in false negatives with the XGBoost model indicates a higher likelihood of detecting illegal items during stop and search operations, thus potentially enhancing public safety and the efficacy of police work.</p>
+<p>Balancing these errors is crucial. The choice of model thus depends on the context-specific cost of these errors. For the London police, the XGBoost model’s lower false negative rate suggests it is more effective at identifying actual instances where illegal items are present, thereby potentially improving crime prevention and intervention outcomes. However, the slight increase in false positives must be managed carefully to avoid unnecessary intrusions and maintain public trust. Ultimately, the decision between these models requires a nuanced consideration of the trade-offs between operational efficiency, public safety, and community relations.</p>
+<div id="fig-confusion" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/classification/confusion_matrix.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Confusion matrix showing the number of correct and incorrect predictions made by the models.</figcaption><p></p>
+</figure>
+</div>
+<p>The ROC curves for the Logistic Regression and XGBoost models illustrate their performance in distinguishing between positive and negative outcomes in stop and search operations. The area under the curve (AUC) is a key metric in these plots, with the Logistic Regression model achieving an AUC of 0.71 and the XGBoost model achieving a higher AUC of 0.81. The higher AUC for the XGBoost model indicates a better overall performance in correctly identifying true positives while minimizing false positives compared to the Logistic Regression model. This demonstrates that the XGBoost model is more effective in differentiating between individuals who possess illegal items and those who do not, which can significantly impact the effectiveness and efficiency of stop and search operations.</p>
+<div id="fig-roc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/classification/roc_curve.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: ROC curves showing the true positive rate against the false positive rate for the Logistic Regression and XGBoost models.</figcaption><p></p>
+</figure>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
