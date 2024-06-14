@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Stop and Searchs</title>
+<title>Stop and Searchs – prediction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">Introduction</a>
+    <a class="nav-link" href="./index.html">Introduction</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./EDA.html">Exploratory Data Analysis</a>
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./classification.html">Classification</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./prediction.html">Prediction</a>
+    <a class="nav-link active" href="./prediction.html" aria-current="page">Prediction</a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -106,8 +106,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#prediction" id="toc-prediction" class="nav-link active" data-scroll-target="#prediction">Prediction</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -116,23 +123,48 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>This project focuses on the analysis and prediction of the outcomes of stop and search (SAS) procedures conducted by the police in London. The primary objective is to determine the likelihood of these stops resulting in significant outcomes, such as arrests, or proving fruitless with individuals being found not guilty of any wrongdoing. By leveraging data science techniques, including machine learning algorithms and statistical analysis, this project aims to provide valuable insights into the efficacy and fairness of stop and search practices. Through this exploration, I hope to shed light on patterns and trends that can inform policy decisions and promote more effective and equitable law enforcement strategies.</p>
-<p>The dataset utilised for this analysis was downloaded from the data.police.uk API, providing records of SAS incidents in London. This dataset includes various attributes such as the time and location of the stop, the reasons given by the officers, and the demographic information of the individuals involved. By cleaning and preprocessing this data, and then applying predictive modelling techniques, the project seeks to identify key factors that influence the outcomes of these stops. The results of this analysis can help in understanding potential biases and improving the targeting of stop and search efforts, ultimately contributing to a more just and efficient policing system. Through this project, I aim to demonstrate the power of data science in addressing real-world issues and driving positive societal change.</p>
+<section id="prediction" class="level1">
+<h1>Prediction</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The goal of this project is to predict the daily number of “use of force” (UoF) incidents by the police in London. This prediction could aid in resource allocation and planning for law enforcement agencies, ensuring they can effectively manage and respond to incidents.</p>
 </section>
-<section id="data" class="level1">
-<h1>Data</h1>
-<p>The data for this project was sourced from the data.police.uk API, which provides records of SAS incidents conducted by the police in London. This dataset includes several key attributes that are crucial for our analysis:</p>
-<ul>
-<li>Date and Time: The specific date and time when the stop and search occurred.</li>
-<li>Location: The geographical location where the stop took place.</li>
-<li>Reason for Stop: The official reason provided by the officers for conducting the stop and search.</li>
-<li>Outcome: The result of the stop and search, such as arrest, no further action, or other outcomes.</li>
-<li>Demographics: Information about the individual subjected to the stop and search, including age, gender, and ethnicity.</li>
-</ul>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Prediction, a core concept in machine learning and data science, involves forecasting continuous outcomes based on input data. In this project, predictive modeling techniques are used to estimate the number of UoF incidents on a given day. By analysing patterns and trends in historical data, these models aim to provide accurate forecasts that can aid in operational decision-making.</p>
+<section id="model" class="level3">
+<h3 class="anchored" data-anchor-id="model">Model</h3>
+<p>The primary regression model used to predict the daily number of UoF incidents is XGBoost. Here’s a brief introduction to the model:</p>
+<p><strong>XGBoost</strong>:<br>
+XGBoost (Extreme Gradient Boosting) is an advanced machine learning algorithm that uses boosting techniques to improve prediction accuracy. It is known for its high performance and efficiency in handling large datasets with complex patterns.</p>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The performance of the XGBoost model is evaluated using common regression metrics such as Root Mean Squared Error (RMSE) and R-squared (R²). The results indicate that XGBoost provides high prediction accuracy.</p>
+<p><strong>Root Mean Squared Error (RMSE)</strong>: - <strong>XGBoost</strong>: RMSE = 36.69</p>
+<p><strong>R-squared (R²)</strong>: - <strong>XGBoost</strong>: R² = 0.897</p>
+<p>The RMSE value indicates that, on average, the predicted number of UoF incidents deviates from the actual number by approximately 36.69 incidents. The R² value suggests that 89.7% of the variability in the number of daily UoF incidents is explained by the model. These metrics highlight the model’s effectiveness in providing accurate predictions and capturing the underlying patterns in the data.</p>
+<div id="fig-pred" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/prediction/pred_vs_actu.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Scatter plot illustratating the relationship between actual values and the predicted values generated by the XGBoost model. The x-axis represents the actual values, while the y-axis denotes the predicted values. Each orange dot corresponds to a pair of actual and predicted values. A red dashed line labeled “y=x” indicates the ideal scenario where the predicted values exactly match the actual values.</figcaption><p></p>
+</figure>
+</div>
+<p>Many points in the scatter plot are closely aligned with the red dashed line, indicating that the XGBoost model has a strong predictive ability. When the points lie directly on this line, it means that the predicted values are equal to the actual values. This close alignment suggests that the model captures the underlying pattern in the data effectively, providing reliable predictions for a substantial portion of the dataset.</p>
+<p>However, some points deviate from the red dashed line, suggesting prediction errors. The spread of these points indicates the degree of error in the model’s predictions. A wider spread away from the line suggests greater prediction error, while a narrower spread indicates higher accuracy. Notably, the majority of data points are clustered in the mid-range values of both actual and predicted values. This concentration suggests that the model performs consistently well within this range. However, at the extremes (both high and low values), the spread appears larger, indicating that the model might have difficulty predicting extreme values accurately.</p>
+<div id="fig-feature-importance" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figures/prediction/feature_importance.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Bar chart showing the relative importance of various features used in the XGBoost model. The x-axis represents the importance score, while the y-axis lists the features. Each bar indicates the importance of a feature in predicting the target variable, with longer bars signifying higher importance.</figcaption><p></p>
+</figure>
+</div>
+<p>The chart clearly shows that the feature ‘count_7_day_avg’ has the highest importance score by a substantial margin. This suggests that the average count over the past seven days is the most influential factor in the model’s predictions. Such a high importance score indicates that this feature provides significant predictive power and has a strong correlation with the target variable.</p>
+<p>Following ‘count_7_day_avg’, the feature ‘mob_count’ also shows notable importance, albeit much lower than the top feature. This suggests that while the count of mobile events contributes to the model’s predictions, its impact is significantly less compared to the seven-day average count. Other features such as ‘ULSD: Pump price (p/litre)’, ‘ULSP: Pump price (p/litre)’, and ‘is bank holiday’ have minimal importance scores, indicating that these factors contribute very little to the model’s predictive ability.</p>
+<p>Interestingly, several weather-related features like ‘precipitation_sum’, ‘rain_sum’, and ‘apparent_temperature_mean’ have negligible importance. This suggests that weather conditions, despite being potentially relevant in some contexts, do not significantly influence the predictions in this specific model. Similarly, temporal features such as ‘WeekOfYear’, ‘DayOfYear’, and ‘DayOfWeek’ also show low importance scores, indicating that the specific time periods do not greatly impact the model’s predictions.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
